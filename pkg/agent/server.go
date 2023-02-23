@@ -30,7 +30,7 @@ func (s *Server) Run() error {
 	signal.Notify(stop, os.Interrupt)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/api/v1/debug", s.ServeDebug)
+	mux.HandleFunc("/api/debug", s.ServeDebug)
 	mux.HandleFunc("/healthz", s.Healthz)
 	server := &http.Server{Addr: s.config.ListenAddress, Handler: mux}
 

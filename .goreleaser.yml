@@ -16,10 +16,10 @@ builds:
     - darwin
   goarch:
     - amd64
-    - 386
+    - "386"
   ignore:
     - goos: darwin
-      goarch: 386
+      goarch: "386"
   ldflags:
     - -s -w -X 'github.com/cnzf1/kubectl-debug/version.gitVersion={{.Version}}'
 checksum:
@@ -38,7 +38,7 @@ brew:
     name: homebrew-tap
   commit_author:
     name: cnzf1
-    email: rayingecho@gmail.com
+    email: cnzf1@github.com
   install: |
     bin.install "kubectl-debug"
   homepage: "https://www.github.com/cnzf1/kubectl-debug"

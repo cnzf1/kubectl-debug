@@ -645,7 +645,7 @@ func (o *DebugOptions) Run() error {
 		if err != nil {
 			return err
 		}
-		uri.Path = fmt.Sprintf("/api/v1/debug")
+		uri.Path = fmt.Sprintf("/api/debug")
 		params := url.Values{}
 		params.Add("image", o.Image)
 		params.Add("container", containerID)
