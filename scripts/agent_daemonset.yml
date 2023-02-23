@@ -14,12 +14,14 @@ spec:
         app: debug-agent
     spec:
       hostPID: true
+      nodeSelector:
+        kubernetes.io/hostname: 10.0.2.168
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
       containers:
         - name: debug-agent
-          image: aylei/debug-agent:latest
+          image: cnzf1/debug-agent:latest
           imagePullPolicy: Always
           securityContext:
             privileged: true

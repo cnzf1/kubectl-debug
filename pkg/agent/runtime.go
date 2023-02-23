@@ -22,8 +22,8 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/aylei/kubectl-debug/pkg/nsenter"
-	term "github.com/aylei/kubectl-debug/pkg/util"
+	"github.com/cnzf1/kubectl-debug/pkg/nsenter"
+	term "github.com/cnzf1/kubectl-debug/pkg/util"
 	containerd "github.com/containerd/containerd"
 	"github.com/containerd/containerd/cio"
 	"github.com/containerd/containerd/content"

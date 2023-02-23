@@ -1,9 +1,9 @@
 # Kubectl debug
 
 ![license](https://img.shields.io/hexpm/l/plug.svg)
-[![travis](https://travis-ci.org/aylei/kubectl-debug.svg?branch=master)](https://travis-ci.org/aylei/kubectl-debug)
-[![Go Report Card](https://goreportcard.com/badge/github.com/aylei/kubectl-debug)](https://goreportcard.com/report/github.com/aylei/kubectl-debug)
-[![docker](https://img.shields.io/docker/pulls/aylei/debug-agent.svg)](https://hub.docker.com/r/aylei/debug-agent)
+[![travis](https://travis-ci.org/cnzf1/kubectl-debug.svg?branch=master)](https://travis-ci.org/cnzf1/kubectl-debug)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cnzf1/kubectl-debug)](https://goreportcard.com/report/github.com/cnzf1/kubectl-debug)
+[![docker](https://img.shields.io/docker/pulls/cnzf1/debug-agent.svg)](https://hub.docker.com/r/cnzf1/debug-agent)
 
 [English](/README.md)
 
@@ -34,22 +34,22 @@
 
 使用 Homebrew:
 ```shell
-brew install aylei/tap/kubectl-debug
+brew install cnzf1/tap/kubectl-debug
 ```
 
 直接下载预编译的压缩包:
 ```bash
 export PLUGIN_VERSION=0.1.1
 # linux x86_64
-curl -Lo kubectl-debug.tar.gz https://github.com/aylei/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_linux_amd64.tar.gz
+curl -Lo kubectl-debug.tar.gz https://github.com/cnzf1/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_linux_amd64.tar.gz
 # macos
-curl -Lo kubectl-debug.tar.gz https://github.com/aylei/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_darwin_amd64.tar.gz
+curl -Lo kubectl-debug.tar.gz https://github.com/cnzf1/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_darwin_amd64.tar.gz
 
 tar -zxvf kubectl-debug.tar.gz kubectl-debug
 sudo mv kubectl-debug /usr/local/bin/
 ```
 
-Windows 用户可以从 [release page](https://github.com/aylei/kubectl-debug/releases/tag/v0.1.1) 进行下载并添加到 PATH 中
+Windows 用户可以从 [release page](https://github.com/cnzf1/kubectl-debug/releases/tag/v0.1.1) 进行下载并添加到 PATH 中
 
 ## (可选) 安装 debug-agent DaemonSet   
 
@@ -59,9 +59,9 @@ Windows 用户可以从 [release page](https://github.com/aylei/kubectl-debug/re
 
 ```bash
 # 如果你的kubernetes版本为v1.16或更高
-kubectl apply -f https://raw.githubusercontent.com/aylei/kubectl-debug/master/scripts/agent_daemonset.yml
+kubectl apply -f https://raw.githubusercontent.com/cnzf1/kubectl-debug/master/scripts/agent_daemonset.yml
 # 如果你使用的是旧版本的kubernetes(<v1.16), 你需要先将apiVersion修改为extensions/v1beta1, 可以如下操作
-wget https://raw.githubusercontent.com/aylei/kubectl-debug/master/scripts/agent_daemonset.yml
+wget https://raw.githubusercontent.com/cnzf1/kubectl-debug/master/scripts/agent_daemonset.yml
 sed -i '' '1s/apps\/v1/extensions\/v1beta1/g' agent_daemonset.yml
 kubectl apply -f agent_daemonset.yml
 # 或者使用helm安装
@@ -132,7 +132,7 @@ make agent-docker
 
 - `port-foward`模式：默认情况下，`kubectl-debug`会直接与目标宿主机建立连接。当`kubectl-debug`无法与目标宿主机直连时，可以开启`port-forward`模式。`port-forward`模式下，本机会监听localhost:agentPort，并将数据转发至目标Pod的agentPort端口。
 
-- `agentless`模式： 默认情况下，`debug-agent`需要预先部署在集群每个节点上，会一直消耗集群资源，然而调试 Pod 是低频操作。为避免集群资源损失，在[#31](https://github.com/aylei/kubectl-debug/pull/31)增加了`agentless`模式。`agentless`模式下，`kubectl-debug`会先在目标Pod所在宿主机上启动`debug-agent`，然后再启动调试容器。用户调试结束后，`kubectl-debug`会依次删除调试容器和在目的主机启动的`debug-agent`。
+- `agentless`模式： 默认情况下，`debug-agent`需要预先部署在集群每个节点上，会一直消耗集群资源，然而调试 Pod 是低频操作。为避免集群资源损失，在[#31](https://github.com/cnzf1/kubectl-debug/pull/31)增加了`agentless`模式。`agentless`模式下，`kubectl-debug`会先在目标Pod所在宿主机上启动`debug-agent`，然后再启动调试容器。用户调试结束后，`kubectl-debug`会依次删除调试容器和在目的主机启动的`debug-agent`。
 
 
 # 配置
@@ -154,8 +154,8 @@ agentPodNamespace: default
 # 默认 debug-agent-pod
 agentPodNamePrefix: debug-agent-pod
 # agentPod 的镜像, agentless模式可用
-# 默认 aylei/debug-agent:latest
-agentImage: aylei/debug-agent:latest
+# 默认 cnzf1/debug-agent:latest
+agentImage: cnzf1/debug-agent:latest
 
 # debug-agent DaemonSet 的名字, port-forward 模式时会用到
 # 默认 'debug-agent'

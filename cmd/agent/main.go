@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/aylei/kubectl-debug/pkg/agent"
+	"github.com/cnzf1/kubectl-debug/pkg/agent"
 )
 
 func main() {

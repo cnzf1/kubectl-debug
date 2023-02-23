@@ -43,4 +43,4 @@ if [[ -n ${GIT_COMMIT-} ]] || GIT_COMMIT=$(git rev-parse "HEAD^{commit}" 2>/dev/
   fi
 fi
 
-echo "-X 'github.com/aylei/kubectl-debug/version.gitVersion=${GIT_VERSION}'"
+echo "-X 'github.com/cnzf1/kubectl-debug/pkg/plugin.gitVersion=${GIT_VERSION}'"

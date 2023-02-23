@@ -16,9 +16,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aylei/kubectl-debug/version"
-
-	term "github.com/aylei/kubectl-debug/pkg/util"
+	term "github.com/cnzf1/kubectl-debug/pkg/util"
 	dockerterm "github.com/docker/docker/pkg/term"
 	"github.com/rs/xid"
 	"github.com/spf13/cobra"
@@ -53,16 +51,16 @@ const (
 	kubectl debug --namespace foo POD_NAME -c CONTAINER_NAME
 
 	# override the default troubleshooting image
-	kubectl debug POD_NAME --image aylei/debug-jvm
+	kubectl debug POD_NAME --image cnzf1/debug-jvm
 
 	# override entrypoint of debug container
-	kubectl debug POD_NAME --image aylei/debug-jvm /bin/bash
+	kubectl debug POD_NAME --image cnzf1/debug-jvm /bin/bash
 
 	# override the debug config file
 	kubectl debug POD_NAME --debug-config ./debug-config.yml
 
 	# check version
-	kubectl --version
+	kubectl debug --version
 `
 	longDesc = `
 Run a container in a running pod, this container will join the namespaces of an existing container of the pod.
@@ -77,7 +75,6 @@ You may set default configuration such as image and command in the config file, 
 
 	usageError = "expects 'debug POD_NAME' for debug command"
 
-	defaultAgentImage               = "aylei/debug-agent:latest"
 	defaultAgentImagePullPolicy     = string(corev1.PullIfNotPresent)
 	defaultAgentImagePullSecretName = ""
 	defaultAgentPodNamePrefix       = "debug-agent-pod"
@@ -100,6 +97,15 @@ You may set default configuration such as image and command in the config file, 
 	portForwardFlag = "port-forward"
 	agentlessFlag   = "agentless"
 )
+
+var (
+	gitVersion        = "v1.0.0-master+$Format:%h$"
+	defaultAgentImage = "cnzf1/debug-agent:latest"
+)
+
+func Version() string {
+	return gitVersion
+}
 
 // DebugOptions specify how to run debug container in a running pod
 type DebugOptions struct {
@@ -189,7 +195,7 @@ func NewDebugCmd(streams genericclioptions.IOStreams) *cobra.Command {
 		Short:                 "Run a container in a running pod",
 		Long:                  longDesc,
 		Example:               example,
-		Version:               version.Version(),
+		Version:               Version(),
 		Run: func(c *cobra.Command, args []string) {
 			argsLenAtDash := c.ArgsLenAtDash()
 			cmdutil.CheckErr(opts.Complete(c, args, argsLenAtDash))

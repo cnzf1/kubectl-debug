@@ -5,9 +5,9 @@ This repository is no longer maintained, please checkout https://github.com/Jame
 # Kubectl-debug
 
 ![license](https://img.shields.io/hexpm/l/plug.svg)
-[![travis](https://travis-ci.org/aylei/kubectl-debug.svg?branch=master)](https://travis-ci.org/aylei/kubectl-debug)
-[![Go Report Card](https://goreportcard.com/badge/github.com/aylei/kubectl-debug)](https://goreportcard.com/report/github.com/aylei/kubectl-debug)
-[![docker](https://img.shields.io/docker/pulls/aylei/debug-agent.svg)](https://hub.docker.com/r/aylei/debug-agent)
+[![travis](https://travis-ci.org/cnzf1/kubectl-debug.svg?branch=master)](https://travis-ci.org/cnzf1/kubectl-debug)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cnzf1/kubectl-debug)](https://goreportcard.com/report/github.com/cnzf1/kubectl-debug)
+[![docker](https://img.shields.io/docker/pulls/cnzf1/debug-agent.svg)](https://hub.docker.com/r/cnzf1/debug-agent)
 
 [简体中文](/docs/zh-cn.md)
 
@@ -40,22 +40,22 @@ This repository is no longer maintained, please checkout https://github.com/Jame
 
 Homebrew:
 ```shell
-brew install aylei/tap/kubectl-debug
+brew install cnzf1/tap/kubectl-debug
 ```
 
 Download the binary:
 ```bash
 export PLUGIN_VERSION=0.1.1
 # linux x86_64
-curl -Lo kubectl-debug.tar.gz https://github.com/aylei/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_linux_amd64.tar.gz
+curl -Lo kubectl-debug.tar.gz https://github.com/cnzf1/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_linux_amd64.tar.gz
 # macos
-curl -Lo kubectl-debug.tar.gz https://github.com/aylei/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_darwin_amd64.tar.gz
+curl -Lo kubectl-debug.tar.gz https://github.com/cnzf1/kubectl-debug/releases/download/v${PLUGIN_VERSION}/kubectl-debug_${PLUGIN_VERSION}_darwin_amd64.tar.gz
 
 tar -zxvf kubectl-debug.tar.gz kubectl-debug
 sudo mv kubectl-debug /usr/local/bin/
 ```
 
-For windows users, download the latest archive from the [release page](https://github.com/aylei/kubectl-debug/releases/tag/v0.1.1), decompress the package and add it to your PATH.
+For windows users, download the latest archive from the [release page](https://github.com/cnzf1/kubectl-debug/releases/tag/v0.1.1), decompress the package and add it to your PATH.
 
 ## (Optional) Install the debug agent DaemonSet
 
@@ -65,9 +65,9 @@ While convenient, creating pod before debugging can be time consuming. You can i
 
 ```bash
 # if your kubernetes version is v1.16 or newer
-kubectl apply -f https://raw.githubusercontent.com/aylei/kubectl-debug/master/scripts/agent_daemonset.yml
+kubectl apply -f https://raw.githubusercontent.com/cnzf1/kubectl-debug/master/scripts/agent_daemonset.yml
 # if your kubernetes is old version(<v1.16), you should change the apiVersion to extensions/v1beta1, As follows
-wget https://raw.githubusercontent.com/aylei/kubectl-debug/master/scripts/agent_daemonset.yml
+wget https://raw.githubusercontent.com/cnzf1/kubectl-debug/master/scripts/agent_daemonset.yml
 sed -i '' '1s/apps\/v1/extensions\/v1beta1/g' agent_daemonset.yml
 kubectl apply -f agent_daemonset.yml
 # or using helm
@@ -154,7 +154,7 @@ make agent-docker
 
 - `port-foward` mode: By default, `kubectl-debug` will directly connect with the target host. When `kubectl-debug` cannot connect to `targetHost:agentPort`, you can enable `port-forward` mode. In `port-forward` mode, the local machine listens on `localhost:agentPort` and forwards data to/from `targetPod:agentPort`.
 
-- `agentless` mode: By default, `debug-agent` needs to be pre-deployed on each node of the cluster, which consumes cluster resources all the time. Unfortunately, debugging Pod is a low-frequency operation. To avoid loss of cluster resources, the `agentless` mode has been added in [#31](https://github.com/aylei/kubectl-debug/pull/31). In `agentless` mode, `kubectl-debug` will first start `debug-agent` on the host where the target Pod is located, and then `debug-agent`  starts the debug container. After the user exits, `kubectl-debug` will delete the debug container and `kubectl-debug` will delete the `debug-agent` pod at last.
+- `agentless` mode: By default, `debug-agent` needs to be pre-deployed on each node of the cluster, which consumes cluster resources all the time. Unfortunately, debugging Pod is a low-frequency operation. To avoid loss of cluster resources, the `agentless` mode has been added in [#31](https://github.com/cnzf1/kubectl-debug/pull/31). In `agentless` mode, `kubectl-debug` will first start `debug-agent` on the host where the target Pod is located, and then `debug-agent`  starts the debug container. After the user exits, `kubectl-debug` will delete the debug container and `kubectl-debug` will delete the `debug-agent` pod at last.
 
 # Configuration
 
@@ -177,8 +177,8 @@ agentPodNamespace: default
 # default to  'debug-agent-pod'
 agentPodNamePrefix: debug-agent-pod
 # image of debug-agent pod, used in agentless mode
-# default to 'aylei/debug-agent:latest'
-agentImage: aylei/debug-agent:latest
+# default to 'cnzf1/debug-agent:latest'
+agentImage: cnzf1/debug-agent:latest
 
 # daemonset name of the debug-agent, used in port-forward
 # default to 'debug-agent'
@@ -307,4 +307,4 @@ Feel free to open issues and pull requests. Any feedback is highly appreciated!
 
 # Acknowledgement
 
-This project would not be here without the effort of [our contributors](https://github.com/aylei/kubectl-debug/graphs/contributors), thanks!
+This project would not be here without the effort of [our contributors](https://github.com/cnzf1/kubectl-debug/graphs/contributors), thanks!

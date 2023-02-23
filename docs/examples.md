@@ -28,7 +28,7 @@ Connect to pod:
 ```shell
 ➜  ~ kubectl debug demo-pod
 
-Agent Pod info: [Name:debug-agent-pod-da46a000-8429-11e9-a40c-8c8590147766, Namespace:default, Image:aylei/debug-agent:latest, HostPort:10027, ContainerPort:10027]
+Agent Pod info: [Name:debug-agent-pod-da46a000-8429-11e9-a40c-8c8590147766, Namespace:default, Image:cnzf1/debug-agent:latest, HostPort:10027, ContainerPort:10027]
 Waiting for pod debug-agent-pod-da46a000-8429-11e9-a40c-8c8590147766 to run...
 pod demo-pod PodIP 10.233.111.78, agentPodIP 172.16.4.160
 wait for forward port to debug agent ready...
@@ -124,7 +124,7 @@ Here's an example:
 
 ```shell
 ➜  ~ kubectl debug demo-pod --fork
-Agent Pod info: [Name:debug-agent-pod-dea9e7c8-8439-11e9-883a-8c8590147766, Namespace:default, Image:aylei/debug-agent:latest, HostPort:10027, ContainerPort:10027]
+Agent Pod info: [Name:debug-agent-pod-dea9e7c8-8439-11e9-883a-8c8590147766, Namespace:default, Image:cnzf1/debug-agent:latest, HostPort:10027, ContainerPort:10027]
 Waiting for pod debug-agent-pod-dea9e7c8-8439-11e9-883a-8c8590147766 to run...
 Waiting for pod demo-pod-e23c1b68-8439-11e9-883a-8c8590147766-debug to run...
 pod demo-pod PodIP 10.233.111.90, agentPodIP 172.16.4.160
