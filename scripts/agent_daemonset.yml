@@ -4,6 +4,7 @@ metadata:
   labels:
     app: debug-agent
   name: debug-agent
+  namespace: default
 spec:
   selector:
     matchLabels:

@@ -67,26 +67,23 @@ Run a container in a running pod, this container will join the namespaces of an 
 
 You may set default configuration such as image and command in the config file, which locates in "~/.kube/debug-config" by default.
 `
-	defaultImage          = "docker.io/nicolaka/netshoot:latest"
 	defaultAgentPort      = 10027
 	defaultConfigLocation = "/.kube/debug-config"
 	defaultDaemonSetName  = "debug-agent"
-	defaultDaemonSetNs    = "default"
 
 	usageError = "expects 'debug POD_NAME' for debug command"
 
 	defaultAgentImagePullPolicy     = string(corev1.PullIfNotPresent)
 	defaultAgentImagePullSecretName = ""
 	defaultAgentPodNamePrefix       = "debug-agent-pod"
-	defaultAgentPodNamespace        = "default"
 	defaultAgentPodCpuRequests      = ""
 	defaultAgentPodCpuLimits        = ""
 	defaultAgentPodMemoryRequests   = ""
 	defaultAgentPodMemoryLimits     = ""
 
-	defaultRegistrySecretName      = "kubectl-debug-registry-secret"
+	defaultRegistrySecretName    = "regsecret"
 	defaultRegistrySecretNamespace = "default"
-	defaultRegistrySkipTLSVerify   = false
+	defaultRegistrySkipTLSVerify = false
 
 	defaultPortForward = true
 	defaultAgentless   = true
@@ -101,6 +98,9 @@ You may set default configuration such as image and command in the config file, 
 var (
 	gitVersion        = "v1.0.0-master+$Format:%h$"
 	defaultAgentImage = "cnzf1/debug-agent:latest"
+	defaultNS         = "default"
+
+	defaultImage = "nicolaka/netshoot:latest"
 )
 
 func Version() string {
@@ -241,7 +241,7 @@ func NewDebugCmd(streams genericclioptions.IOStreams) *cobra.Command {
 	cmd.Flags().StringVar(&opts.AgentPodName, "agent-pod-name-prefix", "",
 		fmt.Sprintf("Agentless mode, pod name prefix , default to %s", defaultAgentPodNamePrefix))
 	cmd.Flags().StringVar(&opts.AgentPodNamespace, "agent-pod-namespace", "",
-		fmt.Sprintf("Agentless mode, agent pod namespace, default to %s", defaultAgentPodNamespace))
+		fmt.Sprintf("Agentless mode, agent pod namespace, default to %s", defaultNS))
 	cmd.Flags().StringVar(&opts.AgentPodResource.CpuRequests, "agent-pod-cpu-requests", "",
 		fmt.Sprintf("Agentless mode, agent pod cpu requests, default is not set"))
 	cmd.Flags().StringVar(&opts.AgentPodResource.MemoryRequests, "agent-pod-memory-requests", "",
@@ -361,7 +361,7 @@ func (o *DebugOptions) Complete(cmd *cobra.Command, args []string, argsLenAtDash
 		if len(config.DebugAgentNamespace) > 0 {
 			o.DebugAgentNamespace = config.DebugAgentNamespace
 		} else {
-			o.DebugAgentNamespace = defaultDaemonSetNs
+			o.DebugAgentNamespace = defaultNS
 		}
 	}
 	if len(o.DebugAgentDaemonSet) < 1 {
@@ -408,7 +408,7 @@ func (o *DebugOptions) Complete(cmd *cobra.Command, args []string, argsLenAtDash
 		if len(config.AgentPodNamespace) > 0 {
 			o.AgentPodNamespace = config.AgentPodNamespace
 		} else {
-			o.AgentPodNamespace = defaultAgentPodNamespace
+			o.AgentPodNamespace = defaultNS
 		}
 	}
 
