@@ -75,15 +75,15 @@ You may set default configuration such as image and command in the config file, 
 
 	defaultAgentImagePullPolicy     = string(corev1.PullIfNotPresent)
 	defaultAgentImagePullSecretName = ""
-	defaultAgentPodNamePrefix       = "debug-agent-pod"
+	defaultAgentPodNamePrefix       = "debug-pod"
 	defaultAgentPodCpuRequests      = ""
 	defaultAgentPodCpuLimits        = ""
 	defaultAgentPodMemoryRequests   = ""
 	defaultAgentPodMemoryLimits     = ""
 
-	defaultRegistrySecretName    = "regsecret"
+	defaultRegistrySecretName      = "regsecret"
 	defaultRegistrySecretNamespace = "default"
-	defaultRegistrySkipTLSVerify = false
+	defaultRegistrySkipTLSVerify   = false
 
 	defaultPortForward = true
 	defaultAgentless   = true
@@ -452,8 +452,10 @@ func (o *DebugOptions) Complete(cmd *cobra.Command, args []string, argsLenAtDash
 		o.PortForward = config.PortForward
 	}
 
-	if !cmd.Flag(agentlessFlag).Changed {
+	if cmd.Flag(agentlessFlag).Changed {
 		o.AgentLess = config.Agentless
+	} else {
+		o.AgentLess = defaultAgentless
 	}
 
 	o.Ports = []string{strconv.Itoa(o.AgentPort)}
@@ -1049,7 +1051,7 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 			RestartPolicy: corev1.RestartPolicyNever,
 		},
 	}
-	fmt.Fprintf(o.Out, "Agent Pod info: [Name:%s, Namespace:%s, Image:%s, HostPort:%d, ContainerPort:%d]\n", agentPod.ObjectMeta.Name, agentPod.ObjectMeta.Namespace, agentPod.Spec.Containers[0].Image, agentPod.Spec.Containers[0].Ports[0].HostPort, agentPod.Spec.Containers[0].Ports[0].ContainerPort)
+	fmt.Fprintf(o.Out, "Debugger Pod info: [Name:%s, Namespace:%s, Image:%s, HostPort:%d, ContainerPort:%d]\n", agentPod.ObjectMeta.Name, agentPod.ObjectMeta.Namespace, agentPod.Spec.Containers[0].Image, agentPod.Spec.Containers[0].Ports[0].HostPort, agentPod.Spec.Containers[0].Ports[0].ContainerPort)
 	return agentPod
 }
 
