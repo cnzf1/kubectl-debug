@@ -4,7 +4,7 @@
 *.output
 .swp
 vendor/
-/debug-agent
+/debugger
 /kubectl-debug
 dist/
 .vscode/

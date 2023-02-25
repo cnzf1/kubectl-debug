@@ -14,7 +14,7 @@ COPY --from=build /usr/bin/ctr /usr/bin/ctr
 COPY ./scripts/start.sh /
 RUN chmod 755 /start.sh
 
-COPY ./debug-agent /bin
+COPY ./debugger /bin
 
 EXPOSE 10027
 CMD ["/start.sh"]

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/cnzf1/kubectl-debug/pkg/agent"
+	"github.com/cnzf1/kubectl-debug/pkg/debugger"
 )
 
 func main() {
@@ -13,12 +13,12 @@ func main() {
 	flag.StringVar(&configFile, "config.file", "", "Config file location.")
 	flag.Parse()
 
-	config, err := agent.LoadFile(configFile)
+	config, err := debugger.LoadFile(configFile)
 	if err != nil {
 		log.Fatalf("error reading config %v", err)
 	}
 
-	server, err := agent.NewServer(config)
+	server, err := debugger.NewServer(config)
 	if err != nil {
 		log.Fatal(err)
 	}

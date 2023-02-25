@@ -7,35 +7,35 @@ import (
 )
 
 type Config struct {
-	AgentPort                int      `yaml:"agentPort,omitempty"`
-	Image                    string   `yaml:"image,omitempty"`
-	RegistrySecretName       string   `yaml:"registrySecretName,omitempty"`
-	RegistrySecretNamespace  string   `yaml:"registrySecretNamespace,omitempty"`
-	RegistrySkipTLSVerify    bool     `yaml:"registrySkipTLSVerify,omitempty"`
-	ForkPodRetainLabels      []string `yaml:"forkPodRetainLabels,omitempty"`
-	DebugAgentDaemonSet      string   `yaml:"debugAgentDaemonset,omitempty"`
-	DebugAgentNamespace      string   `yaml:"debugAgentNamespace,omitempty"`
-	Command                  []string `yaml:"command,omitempty"`
-	PortForward              bool     `yaml:"portForward,omitempty"`
-	Agentless                bool     `yaml:"agentless,omitempty"`
-	AgentPodNamePrefix       string   `yaml:"agentPodNamePrefix,omitempty"`
-	AgentPodNamespace        string   `yaml:"agentPodNamespace,omitempty"`
-	AgentImage               string   `yaml:"agentImage,omitempty"`
-	AgentImagePullPolicy     string   `yaml:"agentImagePullPolicy,omitempty"`
-	AgentImagePullSecretName string   `yaml:"agentImagePullSecretName,omitempty"`
-	AgentPodCpuRequests      string   `yaml:"agentCpuRequests,omitempty"`
-	AgentPodMemoryRequests   string   `yaml:"agentMemoryRequests,omitempty"`
-	AgentPodCpuLimits        string   `yaml:"agentCpuLimits,omitempty"`
-	AgentPodMemoryLimits     string   `yaml:"agentMemoryLimits,omitempty"`
-	IsLxcfsEnabled           bool     `yaml:"isLxcfsEnabled,omitempty"`
-	Verbosity                int      `yaml:"verbosity,omitempty"`
+	DebuggerPort                int      `yaml:"debuggerPort,omitempty"`
+	Image                       string   `yaml:"image,omitempty"`
+	RegistrySecretName          string   `yaml:"registrySecretName,omitempty"`
+	RegistrySecretNamespace     string   `yaml:"registrySecretNamespace,omitempty"`
+	RegistrySkipTLSVerify       bool     `yaml:"registrySkipTLSVerify,omitempty"`
+	ForkPodRetainLabels         []string `yaml:"forkPodRetainLabels,omitempty"`
+	DebuggerDaemonSet           string   `yaml:"debuggerDaemonset,omitempty"`
+	DebuggerNamespace           string   `yaml:"debuggerNamespace,omitempty"`
+	Command                     []string `yaml:"command,omitempty"`
+	PortForward                 bool     `yaml:"portForward,omitempty"`
+	Debuggerless                bool     `yaml:"debuggerless,omitempty"`
+	DebuggerPodNamePrefix       string   `yaml:"debuggerPodNamePrefix,omitempty"`
+	DebuggerPodNamespace        string   `yaml:"debuggerPodNamespace,omitempty"`
+	DebuggerImage               string   `yaml:"debuggerImage,omitempty"`
+	DebuggerImagePullPolicy     string   `yaml:"debuggerImagePullPolicy,omitempty"`
+	DebuggerImagePullSecretName string   `yaml:"debuggerImagePullSecretName,omitempty"`
+	DebuggerPodCpuRequests      string   `yaml:"debuggerCpuRequests,omitempty"`
+	DebuggerPodMemoryRequests   string   `yaml:"debuggerMemoryRequests,omitempty"`
+	DebuggerPodCpuLimits        string   `yaml:"debuggerCpuLimits,omitempty"`
+	DebuggerPodMemoryLimits     string   `yaml:"debuggerMemoryLimits,omitempty"`
+	IsLxcfsEnabled              bool     `yaml:"isLxcfsEnabled,omitempty"`
+	Verbosity                   int      `yaml:"verbosity,omitempty"`
 	// deprecated
-	AgentPortOld int `yaml:"agent_port,omitempty"`
+	DebuggerPortOld int `yaml:"debugger_port,omitempty"`
 }
 
 func Load(s string) (*Config, error) {
 	cfg := &Config{}
-	cfg.Agentless = true
+	cfg.Debuggerless = true
 	cfg.PortForward = true
 	cfg.IsLxcfsEnabled = true
 	err := yaml.Unmarshal([]byte(s), cfg)
@@ -43,8 +43,8 @@ func Load(s string) (*Config, error) {
 		return nil, err
 	}
 	// be compatible with old configuration key
-	if cfg.AgentPort == 0 {
-		cfg.AgentPort = cfg.AgentPortOld
+	if cfg.DebuggerPort == 0 {
+		cfg.DebuggerPort = cfg.DebuggerPortOld
 	}
 	return cfg, nil
 }

@@ -32,14 +32,8 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
-brew:
-  github:
-    owner: cnzf1
-    name: homebrew-tap
-  commit_author:
-    name: cnzf1
-    email: cnzf1@github.com
-  install: |
-    bin.install "kubectl-debug"
-  homepage: "https://www.github.com/cnzf1/kubectl-debug"
-  description: "Debug your pod by a new container with every troubleshooting tools pre-installed"
+
+# The lines beneath this are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj

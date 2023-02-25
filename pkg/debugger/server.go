@@ -1,4 +1,4 @@
-package agent
+package debugger
 
 import (
 	"context"
@@ -82,7 +82,7 @@ func (s *Server) ServeDebug(w http.ResponseWriter, req *http.Request) {
 	if len(imageFromEnv) > 0 {
 		image = imageFromEnv
 		if imageFromPlugin != imageFromEnv && iverbosity > 0 {
-			log.Printf("Using image %v, specified by env var KCTLDBG_RESTRICT_IMAGE_TO on agent, instead of image %v specified by client.\r\n",
+			log.Printf("Using image %v, specified by env var KCTLDBG_RESTRICT_IMAGE_TO on debugger, instead of image %v specified by client.\r\n",
 				imageFromEnv, imageFromPlugin)
 		}
 	} else {

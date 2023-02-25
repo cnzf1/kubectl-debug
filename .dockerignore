@@ -1,3 +1,3 @@
 *
-!debug-agent
+!debugger
 !./scripts/start.sh

@@ -14,6 +14,7 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
 	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973
 	github.com/census-instrumentation/opencensus-proto v0.2.1
+	github.com/cnzf1/gocore v1.1.4
 	github.com/containerd/cgroups v0.0.0-20200407151229-7fc7a507c04c // indirect
 	github.com/containerd/console v1.0.0 // indirect
 	github.com/containerd/containerd v1.3.3
@@ -64,7 +65,7 @@ require (
 	github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910
 	github.com/prometheus/common v0.0.0-20181218105931-67670fe90761
 	github.com/prometheus/procfs v0.0.0-20181204211112-1dc9a6cbc91a
-	github.com/rs/xid v1.4.0 // indirect
+	github.com/rs/xid v1.4.0
 	github.com/russross/blackfriday v0.0.0-20151117072312-300106c228d5
 	github.com/shurcooL/sanitized_anchor_name v1.0.0
 	github.com/sirupsen/logrus v1.4.2
@@ -85,7 +86,7 @@ require (
 	google.golang.org/genproto v0.0.0-20190716160619-c506a9f90610
 	google.golang.org/grpc v1.22.0
 	gopkg.in/inf.v0 v0.9.1
-	gopkg.in/yaml.v2 v2.2.2
+	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/api v0.0.0-20181130031204-d04500c8c3dd
 	k8s.io/apimachinery v0.0.0-20190221213512-86fb29eff628
 	k8s.io/apiserver v0.0.0-20181220070914-ce7b605bead3

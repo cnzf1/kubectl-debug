@@ -9,9 +9,9 @@ If you have any real world examples to share with `kubectl-debug`, feel free to 
 Here's the config file for the following commands for you to re-produce all the command outputs:
 
 ```yaml
-agent_port: 10027
+debugger_port: 10027
 portForward: true
-agentless: true
+debuggerless: true
 command:
 - '/bin/bash'
 - '-l'
@@ -28,10 +28,10 @@ Connect to pod:
 ```shell
 ➜  ~ kubectl debug demo-pod
 
-Agent Pod info: [Name:debug-agent-pod-da46a000-8429-11e9-a40c-8c8590147766, Namespace:default, Image:cnzf1/debug-agent:latest, HostPort:10027, ContainerPort:10027]
-Waiting for pod debug-agent-pod-da46a000-8429-11e9-a40c-8c8590147766 to run...
-pod demo-pod PodIP 10.233.111.78, agentPodIP 172.16.4.160
-wait for forward port to debug agent ready...
+Debugger Pod info: [Name:debugger-pod-da46a000-8429-11e9-a40c-8c8590147766, Namespace:default, Image:cnzf1/debugger:latest, HostPort:10027, ContainerPort:10027]
+Waiting for pod debugger-pod-da46a000-8429-11e9-a40c-8c8590147766 to run...
+pod demo-pod PodIP 10.233.111.78, debuggerPodIP 172.16.4.160
+wait for forward port to debug debugger ready...
 Forwarding from 127.0.0.1:10027 -> 10027
 Forwarding from [::1]:10027 -> 10027
 Handling connection for 10027
@@ -40,7 +40,7 @@ latest: Pulling from nicolaka/netshoot
 Digest: sha256:5b1f5d66c4fa48a931ff54f2f34e5771eff2bc5e615fef441d5858e30e9bb921
 Status: Image is up to date for nicolaka/netshoot:latest
 starting debug container...
-container created, open tty...
+open tty...
 
  [1] 🐳  → hostname
 demo-pod
@@ -124,11 +124,11 @@ Here's an example:
 
 ```shell
 ➜  ~ kubectl debug demo-pod --fork
-Agent Pod info: [Name:debug-agent-pod-dea9e7c8-8439-11e9-883a-8c8590147766, Namespace:default, Image:cnzf1/debug-agent:latest, HostPort:10027, ContainerPort:10027]
-Waiting for pod debug-agent-pod-dea9e7c8-8439-11e9-883a-8c8590147766 to run...
+Debugger Pod info: [Name:debugger-pod-dea9e7c8-8439-11e9-883a-8c8590147766, Namespace:default, Image:cnzf1/debugger:latest, HostPort:10027, ContainerPort:10027]
+Waiting for pod debugger-pod-dea9e7c8-8439-11e9-883a-8c8590147766 to run...
 Waiting for pod demo-pod-e23c1b68-8439-11e9-883a-8c8590147766-debug to run...
-pod demo-pod PodIP 10.233.111.90, agentPodIP 172.16.4.160
-wait for forward port to debug agent ready...
+pod demo-pod PodIP 10.233.111.90, debuggerPodIP 172.16.4.160
+wait for forward port to debug debugger ready...
 Forwarding from 127.0.0.1:10027 -> 10027
 Forwarding from [::1]:10027 -> 10027
 Handling connection for 10027
@@ -137,7 +137,7 @@ latest: Pulling from nicolaka/netshoot
 Digest: sha256:5b1f5d66c4fa48a931ff54f2f34e5771eff2bc5e615fef441d5858e30e9bb921
 Status: Image is up to date for nicolaka/netshoot:latest
 starting debug container...
-container created, open tty...
+open tty...
 
  [1] 🐳  → ps -ef
 PID   USER     TIME  COMMAND

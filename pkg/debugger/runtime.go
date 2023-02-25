@@ -1,4 +1,4 @@
-package agent
+package debugger
 
 import (
 	"bufio"
@@ -159,7 +159,7 @@ func (c *DockerContainerRuntime) RunDebugContainer(cfg RunConfig) error {
 
 	defer c.CleanContainer(cfg, createdBody.ID)
 
-	cfg.stdout.Write([]byte("container created, open tty...\n\r"))
+	cfg.stdout.Write([]byte("open tty...\n\r"))
 
 	// from now on, should pipe stdin to the container and no long read stdin
 	// close(m.stopListenEOF)

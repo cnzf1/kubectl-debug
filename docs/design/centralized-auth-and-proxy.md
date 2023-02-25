@@ -2,15 +2,15 @@
 
 ## Problems
 
-`kubectl-debug` is relying on the `debug-agent` DaemonSet to establish debug connection, which has the following problems:
+`kubectl-debug` is relying on the `debugger` DaemonSet to establish debug connection, which has the following problems:
 
-* `debug-agent` runs in host network, but the node is not always accessible publicly, especially in the public cloud, e.g. GKE.
-* `debug-agent` do not authz & authn request currently, which limits the usage of `kubectl debug` in serious environment.
-* `debug-agent` is a rare operation, but `debug agent` is always consuming a few resources. We may consider agentless mode as an option.
+* `debugger` runs in host network, but the node is not always accessible publicly, especially in the public cloud, e.g. GKE.
+* `debugger` do not authz & authn request currently, which limits the usage of `kubectl debug` in serious environment.
+* `debugger` is a rare operation, but `debug debugger` is always consuming a few resources. We may consider debuggerless mode as an option.
 
 ## Proposal Design
 
-The general idea is: instead of talking to `debug-agent` directly, `kubectl-debug` should talk to `apiserver` only.
+The general idea is: instead of talking to `debugger` directly, `kubectl-debug` should talk to `apiserver` only.
 
 To achieve this goal, we introduce an `ExtendAPIServer` to handle the debug request, our `ExtendAPIServer`(`server` in short) should do the following things:
 
@@ -21,7 +21,7 @@ To achieve this goal, we introduce an `ExtendAPIServer` to handle the debug requ
 * Proxy the terminal connection.
 * Coordinate cleanups.
 
-If we configure the `server` to create debug launching pod in target host on demand, then this is agent-less mode. Agent-less mode will leads to longer debug preparation time obviously.
+If we configure the `server` to create debug launching pod in target host on demand, then this is debugger-less mode. Debugger-less mode will leads to longer debug preparation time obviously.
 
 There's still a security issue about the debug launching pod, because it has the privilege to operate the local containers directly, which is really a super user power.
 

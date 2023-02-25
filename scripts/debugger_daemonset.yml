@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    app: debug-agent
-  name: debug-agent
+    app: debugger
+  name: debugger
   namespace: tools
 spec:
   selector:
     matchLabels:
-      app: debug-agent
+      app: debugger
   template:
     metadata:
       labels:
-        app: debug-agent
+        app: debugger
     spec:
       hostPID: true
       #nodeSelector:
@@ -21,8 +21,8 @@ spec:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
       containers:
-        - name: debug-agent
-          image: cnzf1/debug-agent:latest
+        - name: debugger
+          image: cnzf1/debugger:latest
           imagePullPolicy: Always
           securityContext:
             privileged: true
